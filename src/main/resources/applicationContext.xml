@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:property-placeholder location="classpath:config.properties"/>
+
+  <!-- BeanA (DI setter + property) -->
+  <bean id="beanA" class="com.reksoft.beaninject.beans.BeanA">
+    <property name="value" value="${beanA.value}"/>
+  </bean>
+
+  <!-- BeanB (DI constructor) -->
+  <bean id="beanB" class="com.reksoft.beaninject.beans.BeanB">
+    <constructor-arg ref="beanA"/>
+  </bean>
+
+  <!-- BeanC (default - singleton) + lookup-method -->
+  <bean id="beanC" class="com.reksoft.beaninject.beans.BeanC">
+    <lookup-method name="getBeanD" bean="beanD"/>
+  </bean>
+
+  <!-- BeanD (prototype) -->
+  <bean id="beanD" class="com.reksoft.beaninject.beans.BeanD" scope="prototype"/>
+
+  <!-- BeanE and method replacement -->
+  <bean id="beanE" class="com.reksoft.beaninject.beans.BeanE">
+    <replaced-method name="process" replacer="customMethodReplacer"/>
+  </bean>
+
+  <bean id="customMethodReplacer" class="com.reksoft.beaninject.methodreplacer.CustomMethodReplacer"/>
+
+  <!-- BeanF (lifecycle) -->
+  <bean id="beanF" class="com.reksoft.beaninject.beans.BeanF" init-method="init" destroy-method="destroy"/>
+
+  <!-- BPP -->
+  <bean class="com.reksoft.beaninject.bpp.CustomBeanPostProcessor"/>
+</beans>
