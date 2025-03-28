@@ -12,23 +12,32 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class EmulationService {
 
-  public Horse startRace(Race race) {
-    List<Horse> horses = race.getHorses();
+  public List<Horse> startRace(Race race) {
+    List<Horse> horses = race.getHorses().stream()
+      .sorted(Comparator.comparingDouble(horse -> -horse.getBreed().getSpeed()))
+      .toList();
 
-    System.out.println("\nНачало гонки!\n");
-    for (Horse horse : horses) {
-      System.out.println(
-        horse.getName() + " под управлением " + horse.getRider().getName() + " готов!");
-    }
-
+    System.out.println("\nГонка начинается!\n");
     try {
-      TimeUnit.SECONDS.sleep(1);
+
+      for (Horse horse : horses) {
+        System.out.println(
+          horse.getName() + " под управлением " + horse.getRider().getName() + " готов!");
+        TimeUnit.MILLISECONDS.sleep(500);
+      }
+
+      System.out.println("\nКакая напряжённая гонка...");
+      TimeUnit.SECONDS.sleep(3);
+      System.out.println("Иии... Вот они!");
+      for (Horse horse : horses) {
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println(
+          horse.getName() + " под управлением " + horse.getRider().getName() + " финишируют!");
+      }
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
     }
 
-    return horses.stream()
-      .max(Comparator.comparingDouble(horse -> horse.getBreed().getSpeed()))
-      .orElseThrow();
+    return horses;
   }
 }

@@ -1,15 +1,19 @@
 package com.reksoft.horserace.entity;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @RequiredArgsConstructor
 public class Rider {
 
+  @NotBlank
   private final String name;
   private final boolean gender;
+  @Min(14)
+  @Max(60)
   private final int age;
 }

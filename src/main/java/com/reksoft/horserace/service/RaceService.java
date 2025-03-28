@@ -14,8 +14,11 @@ public class RaceService {
   private final RaceConfig config;
 
   public Race getRace() {
-    return new Race(IntStream.range(0, config.getRaceHorsesCount())
-      .mapToObj(i -> horseService.createRandomHorse())
-      .toList());
+    return new Race(
+      config.getTrackLength(),
+      IntStream.range(0, config.getRaceHorsesCount())
+        .mapToObj(i -> horseService.createRandomHorse())
+        .toList()
+    );
   }
 }
