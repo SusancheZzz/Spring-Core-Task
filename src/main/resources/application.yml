@@ -1,0 +1,10 @@
+race:
+  horsesCount: 5
+  trackLength: 1000
+  speedMin: 30
+  speedMax: 60
+  horseNames: [Storm, Bella, Coco, King, Sapphire, Whisper, Ace, Luna, Noble]
+  riderNames: [John, Anna, Mark, Sarah, David, Oliver, Jack, Harry, Melanie, Barbara, Amanda]
+  breedNames: [Arabian, Thoroughbred, Mustang]
+  horseAge: [3, 4, 5, 6, 7, 8, 9]
+  riderAge: [20, 25, 30, 27, 22, 21, 18, 46, 54]

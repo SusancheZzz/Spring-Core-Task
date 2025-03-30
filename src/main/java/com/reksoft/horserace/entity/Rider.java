@@ -12,7 +12,7 @@ public class Rider {
 
   @NotBlank
   private final String name;
-  private final boolean gender;
+  private final boolean isMale;
   @Min(14)
   @Max(60)
   private final int age;

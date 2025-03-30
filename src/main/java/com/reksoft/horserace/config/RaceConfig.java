@@ -4,48 +4,42 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import java.util.List;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 @Configuration
 @Getter
+@Setter
 @Validated
+@ConfigurationProperties(prefix = "race")
 public class RaceConfig {
 
-  @Value("${race.horses.count}")
   @Positive
-  private int raceHorsesCount;
+  private int horsesCount;
 
-  @Value("${race.track.length}")
   @Positive
   private int trackLength;
 
-  @Value("${race.speed.min}")
   @Positive
-  private double minSpeed;
+  private double speedMin;
 
-  @Value("${race.speed.max}")
   @Positive
-  private double maxSpeed;
+  private double speedMax;
 
-  @Value("#{'${race.horse.names}'.split(',')}")
   @NotEmpty
   private List<String> horseNames;
 
-  @Value("#{'${race.rider.names}'.split(',')}")
   @NotEmpty
   private List<String> riderNames;
 
-  @Value("#{'${race.breed.names}'.split(',')}")
   @NotEmpty
   private List<String> breedNames;
 
-  @Value("#{'${race.horce.age}'.split(',')}")
   @NotEmpty
-  private List<Integer> horceAges;
+  private List<Integer> horseAge;
 
-  @Value("#{'${race.rider.age}'.split(',')}")
   @NotEmpty
-  private List<Integer> riderAges;
+  private List<Integer> riderAge;
 }

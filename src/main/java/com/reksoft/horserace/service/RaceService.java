@@ -16,7 +16,7 @@ public class RaceService {
   public Race getRace() {
     return new Race(
       config.getTrackLength(),
-      IntStream.range(0, config.getRaceHorsesCount())
+      IntStream.range(0, config.getHorsesCount())
         .mapToObj(i -> horseService.createRandomHorse())
         .toList()
     );
